@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCart - B2B Wholesale E-Commerce Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>MyCart</h1>
+                <p>Wholesale Made Easy</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="search-btn" onclick="toggleSearch()">🔍</button>
+                <a href="cart.html" class="cart-btn">🛒 Cart</a>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Wholesale Made Easy & Affordable</h2>
+            <p>Find the best products at wholesale prices from verified sellers</p>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search products..." />
+                <button onclick="searchProducts()">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <h2>Popular Categories</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-icon">📱</div>
+                <h3>Electronics</h3>
+                <p>Latest gadgets and devices</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">👕</div>
+                <h3>Fashion</h3>
+                <p>Apparel and accessories</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🏠</div>
+                <h3>Home & Garden</h3>
+                <p>Furniture and decorations</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🍽️</div>
+                <h3>Kitchen</h3>
+                <p>Cookware and appliances</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🎮</div>
+                <h3>Sports & Outdoors</h3>
+                <p>Sports equipment</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">📚</div>
+                <h3>Books & Media</h3>
+                <p>Educational content</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="products" id="products">
+        <h2>Featured Products</h2>
+        <div class="filters">
+            <input type="range" id="priceFilter" min="0" max="10000" value="10000" placeholder="Max Price" onchange="filterProducts()" />
+            <select id="categoryFilter" onchange="filterProducts()">
+                <option value="">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="fashion">Fashion</option>
+                <option value="home">Home & Garden</option>
+                <option value="kitchen">Kitchen</option>
+            </select>
+        </div>
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be loaded here -->
+            <div class="loading">Loading products...</div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="features">
+        <h2>Why Choose MyCart?</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <h3>✓ Verified Sellers</h3>
+                <p>All sellers are verified and trusted</p>
+            </div>
+            <div class="feature">
+                <h3>✓ Best Prices</h3>
+                <p>Wholesale prices guaranteed</p>
+            </div>
+            <div class="feature">
+                <h3>✓ Fast Delivery</h3>
+                <p>Quick and reliable shipping</p>
+            </div>
+            <div class="feature">
+                <h3>✓ Secure Payment</h3>
+                <p>Multiple payment options</p>
+            </div>
+            <div class="feature">
+                <h3>✓ Quality Assurance</h3>
+                <p>100% genuine products</p>
+            </div>
+            <div class="feature">
+                <h3>✓ Customer Support</h3>
+                <p>24/7 support team ready</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Stay Updated</h2>
+        <p>Subscribe to our newsletter for exclusive deals and updates</p>
+        <div class="newsletter-form">
+            <input type="email" placeholder="Enter your email" />
+            <button>Subscribe</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About MyCart</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MyCart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
