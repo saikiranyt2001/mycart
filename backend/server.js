@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 require('dotenv').config();
+
+const auth = require('./middleware/auth');
 
 const app = express();
 
@@ -12,9 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/products', require('./routes/products'));
-app.use('/api/cart', require('./routes/cart'));
-app.use('/api/orders', require('./routes/orders'));
-app.use('/api/users', require('./routes/users'));
+app.use('/api/cart', auth, require('./routes/cart'));
+app.use('/api/orders', auth, require('./routes/orders'));
+app.use('/api/users', auth, require('./routes/users'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -23,6 +26,33 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const MONGODB_URI = process.env.MONGODB_URI;
+
+const start = async () => {
+  if (!MONGODB_URI) {
+    console.error('Missing MONGODB_URI. Set it in your environment to start the server.');
+    process.exit(1);
+  }
+
+  try {
+    await mongoose.connect(MONGODB_URI);
+    console.log('Connected to MongoDB');
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error('Failed to start server', err);
+    process.exit(1);
+  }
+};
+
+start();
+
+const gracefulShutdown = async () => {
+  await mongoose.connection.close();
+  process.exit(0);
+};
+
+process.on('SIGINT', gracefulShutdown);
+process.on('SIGTERM', gracefulShutdown);

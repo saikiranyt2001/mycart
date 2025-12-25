@@ -48,6 +48,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get categories (placed before dynamic routes to avoid capture by :id)
+router.get('/categories/all', async (req, res) => {
+  try {
+    const categories = await Product.distinct('category');
+    res.json(categories);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 // Get single product
 router.get('/:id', async (req, res) => {
   try {
@@ -60,16 +70,6 @@ router.get('/:id', async (req, res) => {
     }
 
     res.json(product);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-});
-
-// Get categories
-router.get('/categories/all', async (req, res) => {
-  try {
-    const categories = await Product.distinct('category');
-    res.json(categories);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
