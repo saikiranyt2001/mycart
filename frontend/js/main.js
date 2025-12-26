@@ -1,5 +1,9 @@
-// API Configuration
-const API_BASE_URL = 'http://localhost:5000/api';
+// API Configuration (configurable via localStorage)
+// Set `localStorage.apiBaseUrl` to override, e.g. your Render URL.
+// Fallbacks: localhost (dev)
+const DEFAULT_API_BASE_URL = 'http://localhost:5000/api';
+const STORED_API_BASE_URL = (typeof window !== 'undefined') ? window.localStorage.getItem('apiBaseUrl') : null;
+const API_BASE_URL = (STORED_API_BASE_URL && STORED_API_BASE_URL.trim()) ? STORED_API_BASE_URL.trim() : DEFAULT_API_BASE_URL;
 
 // Sample Products Data (for demo)
 const sampleProducts = [

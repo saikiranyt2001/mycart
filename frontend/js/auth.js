@@ -1,5 +1,8 @@
 // Authentication Logic
-const API_BASE_URL = 'http://localhost:5000/api';
+// Configurable API base via localStorage: set `apiBaseUrl` to your Render URL.
+const DEFAULT_API_BASE_URL = 'http://localhost:5000/api';
+const STORED_API_BASE_URL = (typeof window !== 'undefined') ? window.localStorage.getItem('apiBaseUrl') : null;
+const API_BASE_URL = (STORED_API_BASE_URL && STORED_API_BASE_URL.trim()) ? STORED_API_BASE_URL.trim() : DEFAULT_API_BASE_URL;
 
 // Register form submission
 const registerForm = document.getElementById('registerForm');

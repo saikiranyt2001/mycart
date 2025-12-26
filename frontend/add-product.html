@@ -205,7 +205,9 @@
     </div>
 
     <script>
-        const API_BASE_URL = 'http://localhost:5000/api';
+        const DEFAULT_API_BASE_URL = 'http://localhost:5000/api';
+        const STORED_API_BASE_URL = localStorage.getItem('apiBaseUrl');
+        const API_BASE_URL = (STORED_API_BASE_URL && STORED_API_BASE_URL.trim()) ? STORED_API_BASE_URL.trim() : DEFAULT_API_BASE_URL;
 
         // Check if user is logged in
         document.addEventListener('DOMContentLoaded', () => {
