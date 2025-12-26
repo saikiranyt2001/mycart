@@ -1,5 +1,8 @@
-// Cart Management
-document.addEventListener('DOMContentLoaded', () => {
+// Cart Management (uses apiConfig/apiFetch if available)
+document.addEventListener('DOMContentLoaded', async () => {
+    if (window.apiConfig) {
+        await window.apiConfig.ready;
+    }
     displayCart();
 });
 
@@ -79,4 +82,23 @@ function updateCartSummary(cart) {
     if (shippingEl) shippingEl.textContent = shipping === 0 ? 'FREE' : `₹${shipping.toLocaleString('en-IN')}`;
     if (taxEl) taxEl.textContent = `₹${tax.toLocaleString('en-IN')}`;
     if (totalEl) totalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+}
+
+// Optional: sync cart to backend if endpoint exists
+async function syncCartToBackend() {
+    if (!window.apiFetch) return;
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const token = localStorage.getItem('token');
+    try {
+        await window.apiFetch('/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+            },
+            body: JSON.stringify({ items: cart })
+        });
+    } catch (e) {
+        console.warn('Cart sync failed:', e.message);
+    }
 }
