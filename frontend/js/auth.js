@@ -1,8 +1,8 @@
 // Authentication Logic (uses global apiConfig/apiFetch from config.js)
 (async () => {
-    await (window.apiConfig ? window.apiConfig.ready : Promise.resolve());
+  await (window.apiConfig ? window.apiConfig.ready : Promise.resolve());
 
-// Register form submission
+  // Register form submission
 const registerForm = document.getElementById('registerForm');
 if (registerForm) {
     registerForm.addEventListener('submit', async (e) => {
@@ -98,13 +98,14 @@ function logout() {
     window.location.href = 'index.html';
 }
 
-// Update UI based on login status
-document.addEventListener('DOMContentLoaded', () => {
-    const loginBtn = document.querySelector('.login-btn');
-    if (loginBtn && isLoggedIn()) {
-        const user = getCurrentUser();
-        loginBtn.textContent = `${user.name}`;
-        loginBtn.href = 'javascript:void(0);';
-        loginBtn.onclick = logout;
-    }
+  // Update UI based on login status
+  document.addEventListener('DOMContentLoaded', () => {
+      const loginBtn = document.querySelector('.login-btn');
+      if (loginBtn && isLoggedIn()) {
+          const user = getCurrentUser();
+          loginBtn.textContent = `${user.name}`;
+          loginBtn.href = 'javascript:void(0);';
+          loginBtn.onclick = logout;
+      }
+  });
 })();
