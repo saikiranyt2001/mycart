@@ -28,6 +28,16 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
+// Mask MongoDB URI for safe logging (hide password)
+const maskMongoUri = (uri) => {
+  if (!uri) return '';
+  try {
+    return uri.replace(/(mongodb\+srv:\/\/[^:]+):([^@]+)@/, (_, userPart) => `${userPart}:****@`);
+  } catch {
+    return '[invalid URI]';
+  }
+};
+
 const start = async () => {
   if (!MONGODB_URI) {
     console.error('Missing MONGODB_URI. Set it in your environment to start the server.');
@@ -35,14 +45,20 @@ const start = async () => {
   }
 
   try {
-    await mongoose.connect(MONGODB_URI);
+    console.log('Connecting to MongoDB...', maskMongoUri(MONGODB_URI));
+    await mongoose.connect(MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000
+    });
     console.log('Connected to MongoDB');
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
   } catch (err) {
-    console.error('Failed to start server', err);
+    console.error('Failed to start server');
+    console.error('Error name:', err.name);
+    if (err.reason) console.error('Reason:', err.reason);
+    console.error('Message:', err.message);
     process.exit(1);
   }
 };
