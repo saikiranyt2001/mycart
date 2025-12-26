@@ -25,6 +25,7 @@
                 <button class="search-btn" onclick="toggleSearch()">🔍</button>
                 <a href="cart.html" class="cart-btn">🛒 Cart</a>
                 <a href="login.html" class="login-btn">Login</a>
+                <button class="api-btn" onclick="changeApiBase()" title="Set API Base">API</button>
             </div>
         </div>
     </nav>
@@ -179,6 +180,24 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+        <script>
+            // Simple API base switcher using localStorage
+            const DEFAULT_API_BASE_URL = 'http://localhost:5000/api';
+            function changeApiBase() {
+                const current = localStorage.getItem('apiBaseUrl') || '';
+                const url = prompt('Enter API base URL (e.g., https://your-service.onrender.com/api)\nLeave blank to reset to default.', current);
+                if (url === null) return; // cancelled
+                const trimmed = url.trim();
+                if (trimmed) {
+                    localStorage.setItem('apiBaseUrl', trimmed);
+                    alert('API base set to:\n' + trimmed);
+                } else {
+                    localStorage.removeItem('apiBaseUrl');
+                    alert('API base reset to default:\n' + DEFAULT_API_BASE_URL);
+                }
+                location.reload();
+            }
+        </script>
+        <script src="js/main.js"></script>
 </body>
 </html>
