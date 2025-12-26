@@ -19,6 +19,11 @@ app.use('/api/cart', auth, require('./routes/cart'));
 app.use('/api/orders', auth, require('./routes/orders'));
 app.use('/api/users', auth, require('./routes/users'));
 
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

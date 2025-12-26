@@ -1,8 +1,6 @@
-// Authentication Logic
-// Configurable API base via localStorage: set `apiBaseUrl` to your Render URL.
-const DEFAULT_API_BASE_URL = 'http://localhost:5000/api';
-const STORED_API_BASE_URL = (typeof window !== 'undefined') ? window.localStorage.getItem('apiBaseUrl') : null;
-const API_BASE_URL = (STORED_API_BASE_URL && STORED_API_BASE_URL.trim()) ? STORED_API_BASE_URL.trim() : DEFAULT_API_BASE_URL;
+// Authentication Logic (uses global apiConfig/apiFetch from config.js)
+(async () => {
+    await (window.apiConfig ? window.apiConfig.ready : Promise.resolve());
 
 // Register form submission
 const registerForm = document.getElementById('registerForm');
@@ -20,7 +18,7 @@ if (registerForm) {
         };
 
         try {
-            const response = await fetch(`${API_BASE_URL}/auth/register`, {
+            const response = await window.apiFetch('/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -57,7 +55,7 @@ if (loginForm) {
         };
 
         try {
-            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+            const response = await window.apiFetch('/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -109,4 +107,4 @@ document.addEventListener('DOMContentLoaded', () => {
         loginBtn.href = 'javascript:void(0);';
         loginBtn.onclick = logout;
     }
-});
+})();
