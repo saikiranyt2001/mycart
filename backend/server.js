@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config();
+const path = require('path');
+// Load env from backend/.env regardless of CWD
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const auth = require('./middleware/auth');
 
