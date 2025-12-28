@@ -1,0 +1,35 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.git/**",
+    "**/.vscode/**",
+    "**/package-lock.json"
+  ],
+  "words": [
+    "MyCart",
+    "mycart",
+    "ecommerce",
+    "mongosh",
+    "AMOLED",
+    "midsole",
+    "cooktops",
+    "décor",
+    "decor",
+    "Stackable",
+    "stackable",
+    "handfeel",
+    "wireframes",
+    "vlogging",
+    "Mgmt",
+    "MOQ",
+    "B2B",
+    "API",
+    "JWT",
+    "Render",
+    "upskilling"
+  ]
+}
