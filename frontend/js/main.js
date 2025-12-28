@@ -91,7 +91,33 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProducts(sampleProducts);
     wireCategoryCards();
     setupNavSearchDismiss();
+    updateNavLoginButton(getStoredUser());
 });
+
+function updateNavLoginButton(user) {
+    const loginBtn = document.querySelector('.login-btn');
+    if (!loginBtn) return;
+    const loggedIn = Boolean(localStorage.getItem('token') && user);
+    if (loggedIn) {
+        const label = user.name || user.email || 'Account';
+        loginBtn.textContent = label;
+        loginBtn.setAttribute('href', 'seller.html');
+        loginBtn.title = `Logged in as ${label}`;
+    } else {
+        loginBtn.textContent = 'Login';
+        loginBtn.setAttribute('href', 'login.html');
+        loginBtn.removeAttribute('title');
+    }
+}
+
+function getStoredUser() {
+    try {
+        const value = localStorage.getItem('user');
+        return value ? JSON.parse(value) : null;
+    } catch (_e) {
+        return null;
+    }
+}
 
 // Load and display products
 function loadProducts(products) {

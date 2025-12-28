@@ -117,7 +117,7 @@
         51:['Frameworks with examples', 'Case-style breakdowns', 'Actionable checklists'],
         52:['Campaign planning guidance', 'Funnel metrics explained', 'Templates for briefs'],
         53:['Python + stats primer', 'ML intuition without heavy math', 'Hands-on mini projects'],
-        54:['Scope, schedule, risk templates', 'Clear RACI examples', 'Change control guidance'],
+        54:['Scope, schedule, risk templates', 'Clear RACE examples', 'Change control guidance'],
         55:['Industry use-cases', 'Plain-language AI concepts', 'Starter project ideas'],
         56:['Idea validation steps', 'MVP launch guidance', 'Early growth tactics'],
         57:['Model structures step-by-step', 'Scenario building tips', 'Spreadsheet ready'],

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Portal - MyCart</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="seller-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <h1>MyCart</h1>
+                <p>Wholesale Made Easy</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="index.html#categories">Categories</a></li>
+                <li><a href="product-details.html">Descriptions</a></li>
+                <li><a href="seller.html">Seller Portal</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-btn">🛒 Cart</a>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero seller-hero">
+        <div class="container seller-hero__bar">
+            <h1>Seller Portal</h1>
+            <p class="muted">Register or sign in, then add your products to MyCart.</p>
+            <div id="sellerStatus" class="seller-status muted"></div>
+        </div>
+    </header>
+
+    <main class="container seller-main">
+        <div class="add-product-header">
+            <h2>Add a Product</h2>
+            <p>Login or register as a seller to start adding your products</p>
+        </div>
+        
+        <div class="seller-grid">
+            <div class="auth-box seller-card" id="loginBox">
+                <h2>Seller Login</h2>
+                <form id="sellerLoginForm">
+                    <div class="form-group">
+                        <label for="sellerLoginEmail">Email</label>
+                        <input type="email" id="sellerLoginEmail" name="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="sellerLoginPassword">Password</label>
+                        <input type="password" id="sellerLoginPassword" name="password" required />
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+                </form>
+            </div>
+
+            <div class="auth-box seller-card" id="registerBox">
+                <h2>Seller Registration</h2>
+                <form id="sellerRegisterForm">
+                    <div class="form-group">
+                        <label for="sellerName">Full Name</label>
+                        <input type="text" id="sellerName" name="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="sellerEmail">Email</label>
+                        <input type="email" id="sellerEmail" name="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="sellerPassword">Password</label>
+                        <input type="password" id="sellerPassword" name="password" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="sellerPhone">Phone Number</label>
+                        <input type="tel" id="sellerPhone" name="phone" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="sellerCompany">Company Name</label>
+                        <input type="text" id="sellerCompany" name="companyName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="sellerBusinessType">Business Type</label>
+                        <select id="sellerBusinessType" name="businessType">
+                            <option value="Individual">Individual</option>
+                            <option value="Retailer">Retailer</option>
+                            <option value="Distributor">Distributor</option>
+                            <option value="B2B">B2B</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="productCard" class="seller-product-wrapper" style="display: none;">
+            <div class="auth-box seller-card">
+                <div class="seller-card__head">
+                    <div>
+                        <h2 style="margin: 0;">Add a Product</h2>
+                        <span id="sellerUserBadge" class="muted" style="font-size: 14px; display: inline-block; margin-top: 4px;"></span>
+                    </div>
+                    <button id="sellerLogout" class="btn-secondary" type="button">Logout</button>
+                </div>
+                <p class="muted" style="margin: 8px 0 16px;">Provide key details so buyers can find your item.</p>
+                <form id="productForm" class="checkout-form" style="gap: 14px;">
+                <div class="form-row">
+                    <input type="text" id="productName" name="name" placeholder="Product name" required />
+                </div>
+                <div class="form-row">
+                    <textarea id="productDescription" name="description" rows="3" placeholder="Short description" required class="seller-textarea"></textarea>
+                </div>
+                <div class="form-row two-col">
+                    <input type="text" id="productCategory" name="category" placeholder="Category (e.g., electronics)" required />
+                    <input type="text" id="productSubCategory" name="subCategory" placeholder="Sub-category (optional)" />
+                </div>
+                <div class="form-row two-col">
+                    <input type="number" id="productPrice" name="price" placeholder="Price" min="0" step="0.01" required />
+                    <input type="number" id="productStock" name="stock" placeholder="Stock" min="0" step="1" required />
+                </div>
+                <div class="form-row two-col">
+                    <input type="number" id="productMinOrder" name="minOrderQuantity" placeholder="Min order quantity" min="1" step="1" value="1" />
+                    <input type="url" id="productImage" name="imageUrl" placeholder="Primary image URL (optional)" />
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 4px;">Publish Product</button>
+            </form>
+            <p id="productStatus" class="muted" style="margin-top:12px; font-size: 14px;"></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/seller.js"></script>
+</body>
+</html>
