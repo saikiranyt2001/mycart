@@ -8,8 +8,24 @@ router.post('/', auth, async (req, res) => {
   try {
     const { name, description, category, subCategory, price, stock, images, minOrderQuantity } = req.body;
 
-    if (!name || !description || !category || !price || stock === undefined) {
+    const priceNum = Number(price);
+    const stockNum = Number(stock);
+    const minQtyNum = minOrderQuantity === undefined ? 1 : Number(minOrderQuantity);
+
+    if (!name || !description || !category || stock === undefined || price === undefined) {
       return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    if (!Number.isFinite(priceNum) || priceNum < 0) {
+      return res.status(400).json({ message: 'Price must be a non-negative number' });
+    }
+
+    if (!Number.isFinite(stockNum) || stockNum < 0) {
+      return res.status(400).json({ message: 'Stock must be a non-negative number' });
+    }
+
+    if (!Number.isFinite(minQtyNum) || minQtyNum <= 0) {
+      return res.status(400).json({ message: 'minOrderQuantity must be a positive number' });
     }
 
     const product = new Product({
@@ -17,10 +33,10 @@ router.post('/', auth, async (req, res) => {
       description,
       category,
       subCategory: subCategory || '',
-      price: Number(price),
-      stock: Number(stock),
+      price: priceNum,
+      stock: stockNum,
       images: images || [],
-      minOrderQuantity: minOrderQuantity || 1,
+      minOrderQuantity: minQtyNum,
       seller: req.userId,
       isActive: true
     });
@@ -83,7 +99,17 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get product by ID (place before /categories to avoid conflicts)
+// Get categories (placed before dynamic routes to avoid capture by :id)
+router.get('/categories/all', async (req, res) => {
+  try {
+    const categories = await Product.distinct('category');
+    res.json(categories);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Get product by ID (placed after static routes)
 router.get('/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
@@ -95,16 +121,6 @@ router.get('/:id', async (req, res) => {
     }
 
     res.json(product);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-});
-
-// Get categories (placed before dynamic routes to avoid capture by :id)
-router.get('/categories/all', async (req, res) => {
-  try {
-    const categories = await Product.distinct('category');
-    res.json(categories);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
