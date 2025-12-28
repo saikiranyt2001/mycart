@@ -22,12 +22,20 @@
   async function resolveBase() {
     const stored = (typeof window !== 'undefined') ? window.localStorage.getItem('apiBaseUrl') : null;
     const candidates = [];
-    if (stored && stored.trim()) candidates.push(stored.trim());
+    const isLocalHost = (typeof window !== 'undefined') && ['localhost', '127.0.0.1'].includes(window.location.hostname);
+
+    if (!isLocalHost && stored && stored.trim()) {
+      candidates.push(stored.trim());
+    }
+
     // Prefer explicit local dev first (backend on 5000)
     candidates.push(DEFAULT_LOCAL);
+
     if (typeof window !== 'undefined' && window.location && /^https?:/.test(window.location.origin)) {
       candidates.push(`${window.location.origin}/api`);
     }
+
+    // Remote last
     candidates.push(DEFAULT_REMOTE);
 
     for (const c of candidates) {
