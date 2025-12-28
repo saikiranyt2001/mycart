@@ -1,6 +1,6 @@
 (function () {
   const DEFAULT_REMOTE = 'https://mycart-1-4ws8.onrender.com/api';
-  const DEFAULT_LOCAL = 'http://localhost:5500/api';
+  const DEFAULT_LOCAL = 'http://localhost:5000/api';
 
   function withTimeout(promise, ms) {
     return new Promise((resolve, reject) => {
@@ -23,12 +23,11 @@
     const stored = (typeof window !== 'undefined') ? window.localStorage.getItem('apiBaseUrl') : null;
     const candidates = [];
     if (stored && stored.trim()) candidates.push(stored.trim());
-    // Prefer local dev first when running on localhost
-    candidates.push(DEFAULT_LOCAL);
     if (typeof window !== 'undefined' && window.location && /^https?:/.test(window.location.origin)) {
       candidates.push(`${window.location.origin}/api`);
     }
     candidates.push(DEFAULT_REMOTE);
+    candidates.push(DEFAULT_LOCAL);
 
     for (const c of candidates) {
       if (await probe(c)) return c;
