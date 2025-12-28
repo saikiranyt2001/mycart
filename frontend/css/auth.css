@@ -50,6 +50,35 @@ body {
     margin-bottom: 1.5rem;
 }
 
+.password-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.password-input-wrapper input {
+    flex: 1;
+}
+
+.toggle-password {
+    border: 1px solid var(--border-color);
+    background: #f7f7f7;
+    border-radius: 5px;
+    padding: 0.6rem 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.toggle-password:hover {
+    background: #ededed;
+    border-color: var(--primary-color);
+}
+
+.toggle-password:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;

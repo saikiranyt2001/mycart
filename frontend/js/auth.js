@@ -107,5 +107,16 @@ function logout() {
           loginBtn.href = 'javascript:void(0);';
           loginBtn.onclick = logout;
       }
+
+      // Toggle password visibility on login page
+      const passwordInput = document.getElementById('password');
+      const toggleBtn = document.querySelector('.toggle-password');
+      if (passwordInput && toggleBtn) {
+          toggleBtn.addEventListener('click', () => {
+              const isPassword = passwordInput.type === 'password';
+              passwordInput.type = isPassword ? 'text' : 'password';
+              toggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+          });
+      }
   });
 })();
