@@ -24,18 +24,22 @@
     const candidates = [];
     const isLocalHost = (typeof window !== 'undefined') && ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
-    if (!isLocalHost && stored && stored.trim()) {
+    // On localhost/127 force local backend without probing to avoid hitting remote
+    if (isLocalHost) {
+      console.info('[api] forcing local base', DEFAULT_LOCAL);
+      return DEFAULT_LOCAL;
+    }
+
+    if (stored && stored.trim()) {
       candidates.push(stored.trim());
     }
 
-    // Prefer explicit local dev first (backend on 5000)
     candidates.push(DEFAULT_LOCAL);
 
     if (typeof window !== 'undefined' && window.location && /^https?:/.test(window.location.origin)) {
       candidates.push(`${window.location.origin}/api`);
     }
 
-    // Remote last
     candidates.push(DEFAULT_REMOTE);
 
     for (const c of candidates) {
@@ -44,7 +48,6 @@
         return c;
       }
     }
-    // Fallback to first candidate even if probe failed
     console.warn('[api] falling back to', candidates[0]);
     return candidates[0] || DEFAULT_LOCAL;
   }
