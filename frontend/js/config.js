@@ -39,15 +39,20 @@
     candidates.push(DEFAULT_REMOTE);
 
     for (const c of candidates) {
-      if (await probe(c)) return c;
+      if (await probe(c)) {
+        console.info('[api] using', c);
+        return c;
+      }
     }
     // Fallback to first candidate even if probe failed
+    console.warn('[api] falling back to', candidates[0]);
     return candidates[0] || DEFAULT_LOCAL;
   }
 
   const ready = (async () => {
     const base = await resolveBase();
     window.API_BASE_URL = base;
+    console.info('[api] ready base', base);
   })();
 
   window.apiConfig = {
