@@ -1,6 +1,7 @@
 (function () {
   const DEFAULT_REMOTE = 'https://mycart-1-4ws8.onrender.com/api';
-  const DEFAULT_LOCAL = 'http://localhost:5000/api';
+  const LOCAL_PORTS = [10000, 5000];
+  const DEFAULT_LOCAL = `http://localhost:${LOCAL_PORTS[0]}/api`;
 
   function withTimeout(promise, ms) {
     return new Promise((resolve, reject) => {
@@ -29,7 +30,8 @@
     }
 
     if (isLocalHost) {
-      candidates.push(DEFAULT_LOCAL, DEFAULT_REMOTE);
+      // Try multiple local ports then remote
+      candidates.push(...LOCAL_PORTS.map(p => `http://localhost:${p}/api`), DEFAULT_REMOTE);
     } else {
       candidates.push(DEFAULT_LOCAL);
       if (typeof window !== 'undefined' && window.location && /^https?:/.test(window.location.origin)) {
