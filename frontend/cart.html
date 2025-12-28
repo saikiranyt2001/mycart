@@ -35,25 +35,58 @@
                 </div>
             </div>
 
-            <div class="cart-summary">
-                <h3>Order Summary</h3>
-                <div class="summary-item">
-                    <span>Subtotal:</span>
-                    <span id="subtotal">₹0</span>
+            <div class="checkout-side">
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-item">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₹0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Shipping:</span>
+                        <span id="shipping">₹0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Tax:</span>
+                        <span id="tax">₹0</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span id="total">₹0</span>
+                    </div>
+                    <button class="btn-checkout" type="submit" form="checkoutForm">Save Address & Continue</button>
                 </div>
-                <div class="summary-item">
-                    <span>Shipping:</span>
-                    <span id="shipping">₹0</span>
+
+                <div class="checkout-card">
+                    <h3>Shipping Address</h3>
+                    <form id="checkoutForm" class="checkout-form">
+                        <div class="form-row">
+                            <input id="fullName" name="fullName" type="text" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-row two-col">
+                            <input id="email" name="email" type="email" placeholder="Email" required>
+                            <input id="phone" name="phone" type="tel" placeholder="Phone" required>
+                        </div>
+                        <div class="form-row">
+                            <input id="address1" name="address1" type="text" placeholder="Address line 1" required>
+                        </div>
+                        <div class="form-row">
+                            <input id="address2" name="address2" type="text" placeholder="Address line 2 (optional)">
+                        </div>
+                        <div class="form-row two-col">
+                            <input id="city" name="city" type="text" placeholder="City" required>
+                            <input id="state" name="state" type="text" placeholder="State" required>
+                        </div>
+                        <div class="form-row two-col">
+                            <input id="postalCode" name="postalCode" type="text" placeholder="Postal Code" required>
+                            <input id="country" name="country" type="text" placeholder="Country" required>
+                        </div>
+                        <button type="submit">Save & Continue</button>
+                    </form>
+                    <div class="address-preview" id="addressPreview">
+                        <p class="muted">No address saved yet.</p>
+                    </div>
                 </div>
-                <div class="summary-item">
-                    <span>Tax:</span>
-                    <span id="tax">₹0</span>
-                </div>
-                <div class="summary-total">
-                    <span>Total:</span>
-                    <span id="total">₹0</span>
-                </div>
-                <button class="btn-checkout">Proceed to Checkout</button>
             </div>
         </div>
     </section>

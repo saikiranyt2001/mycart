@@ -1,7 +1,7 @@
 {
-  "name": "udaan-ecommerce-backend",
+  "name": "mycart-ecommerce-backend",
   "version": "1.0.0",
-  "description": "Backend for Udaan-like e-commerce platform",
+  "description": "Backend for MyCart e-commerce platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,7 +9,7 @@
   },
   "keywords": [
     "ecommerce",
-    "udaan",
+    "mycart",
     "wholesale"
   ],
   "author": "",

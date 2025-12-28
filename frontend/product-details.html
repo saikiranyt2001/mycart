@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Descriptions - MyCart</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="hero" style="padding: 28px 0 16px; min-height: auto;">
+        <div class="container" style="display:flex; justify-content: space-between; align-items: center; gap: 12px;">
+            <div>
+                <h1 id="productDetailsHeading" style="margin:0 0 6px;">Product Descriptions</h1>
+                <p id="productDetailsSubhead" style="margin:0; color:#555;">Browse every item with key details at a glance.</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <a href="index.html" class="btn-secondary" style="text-decoration:none;">Back to Home</a>
+                <a href="cart.html" class="btn-primary" style="text-decoration:none;">Go to Cart</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 20px 0 40px;">
+        <div id="productsDetailGrid" class="product-details-grid"></div>
+        <div id="relatedSection" style="margin-top:32px;">
+            <h2 style="margin: 0 0 12px;">Related Products</h2>
+            <div id="relatedGrid" class="product-details-grid"></div>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/product-details.js"></script>
+</body>
+</html>

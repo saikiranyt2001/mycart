@@ -1,6 +1,6 @@
 # MyCart - B2B Wholesale E-Commerce Platform
 
-A modern, scalable e-commerce platform similar to Udaan, designed for B2B wholesale transactions.
+A modern, scalable e-commerce platform similar to MyCart, designed for B2B wholesale transactions.
 
 ## 📋 Project Structure
 
@@ -90,7 +90,7 @@ cp .env.example .env
 4. Update `.env` with your configuration:
 ```
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/udaan-ecommerce
+MONGODB_URI=mongodb://localhost:27017/mycart-ecommerce
 JWT_SECRET=your_secure_secret_key_here
 NODE_ENV=development
 ```
@@ -128,7 +128,7 @@ npx http-server
 1. Create MongoDB database:
 ```bash
 mongosh
-use udaan-ecommerce
+use mycart-ecommerce
 ```
 
 2. Or import SQL schema (if using MySQL):

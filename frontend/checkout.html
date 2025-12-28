@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - MyCart</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="hero" style="padding: 32px 0 12px; min-height: auto;">
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                <div>
+                    <h1 style="margin-bottom: 6px;">Checkout</h1>
+                    <p style="margin: 0; color: #666;">Review your shipping details and order before payment.</p>
+                </div>
+                <a href="cart.html" class="btn-primary" style="text-decoration: none;">Back to Cart</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="cart-section" style="padding-top: 16px;">
+        <div class="container">
+            <div class="checkout-layout">
+                <div class="checkout-block">
+                    <h3>Shipping Address</h3>
+                    <div id="addressBlock" class="address-preview" style="margin-top: 10px;"></div>
+                </div>
+
+                <div class="checkout-block">
+                    <h3>Items</h3>
+                    <div id="itemsList" class="cart-items-list"></div>
+                </div>
+
+                <div class="checkout-block" style="max-width: 520px;">
+                    <h3>Order Summary</h3>
+                    <div class="summary-item"><span>Subtotal</span><span id="summarySubtotal">₹0</span></div>
+                    <div class="summary-item"><span>Shipping</span><span id="summaryShipping">₹0</span></div>
+                    <div class="summary-item"><span>Tax</span><span id="summaryTax">₹0</span></div>
+                    <div class="summary-total"><span>Total</span><span id="summaryTotal">₹0</span></div>
+                    <div style="display:flex; gap:12px; margin-top:12px; flex-wrap: wrap;">
+                        <button class="btn-checkout" id="placeOrderBtn" style="flex:1; min-width:200px;">Place Order</button>
+                        <a href="cart.html" class="btn-secondary" style="flex:1; min-width:160px; text-align:center;">Edit Cart</a>
+                    </div>
+                    <p id="checkoutStatus" class="muted" style="margin-top:8px;"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/config.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>

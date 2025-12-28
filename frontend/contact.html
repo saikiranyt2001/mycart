@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact MyCart</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <h1>MyCart</h1>
+                <p>Wholesale Made Easy</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="index.html#categories">Categories</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-btn">🛒 Cart</a>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="contact-hero">
+        <h2>We’re here to help</h2>
+        <p>Questions about orders, sourcing, or onboarding? Reach out and our team will respond fast.</p>
+    </section>
+
+    <div class="contact-wrapper">
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3>Support</h3>
+                <p>Email: <a href="mailto:saikiranreddy8832@gmail.com">saikiranreddy8832@gmail.com</a></p>
+                <p>Phone: <a href="tel:6281849464">6281849464</a></p>
+                <p>Hours: Mon–Sat, 9am–7pm</p>
+            </div>
+            <div class="contact-card">
+                <h3>Sales</h3>
+                <p>Email: <a href="mailto:saikiranreddy8832@gmail.com">saikiranreddy8832@gmail.com</a></p>
+                <p>Phone: <a href="tel:6281849464">6281849464</a></p>
+                <p>We help with bulk pricing and onboarding.</p>
+            </div>
+            <div class="contact-card">
+                <h3>Logistics</h3>
+                <p>Email: logistics@mycart.com</p>
+                <p>Track deliveries or arrange freight.</p>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <h3>Send us a note</h3>
+            <form class="contact-form">
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-row">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-row">
+                    <select name="topic" required>
+                        <option value="" disabled selected>Select a topic</option>
+                        <option value="orders">Orders & billing</option>
+                        <option value="sourcing">Sourcing & catalog</option>
+                        <option value="logistics">Shipping & logistics</option>
+                        <option value="accounts">Account access</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <textarea name="message" rows="4" placeholder="Tell us how we can help" required></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="contact-cta">
+            <h3>Need immediate help?</h3>
+            <p>Check our quick-start guide or FAQ while we reply.</p>
+            <p><a href="index.html#products">Browse catalog</a> · <a href="login.html">Sign in</a></p>
+        </div>
+    </div>
+</body>
+</html>

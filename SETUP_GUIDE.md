@@ -124,7 +124,7 @@ Create `.env` in backend directory:
 
 ```
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/udaan-ecommerce
+MONGODB_URI=mongodb://localhost:27017/mycart-ecommerce
 JWT_SECRET=your_super_secret_jwt_key_change_this
 NODE_ENV=development
 ```

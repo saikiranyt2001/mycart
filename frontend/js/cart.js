@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await window.apiConfig.ready;
     }
     displayCart();
+    setupCheckoutForm();
 });
 
 function displayCart() {
@@ -82,6 +83,114 @@ function updateCartSummary(cart) {
     if (shippingEl) shippingEl.textContent = shipping === 0 ? 'FREE' : `₹${shipping.toLocaleString('en-IN')}`;
     if (taxEl) taxEl.textContent = `₹${tax.toLocaleString('en-IN')}`;
     if (totalEl) totalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+}
+
+function setupCheckoutForm() {
+    const form = document.getElementById('checkoutForm');
+    if (!form) return;
+
+    hydrateAddressForm(form);
+    renderAddressPreview(loadSavedAddress());
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length === 0) {
+            alert('Your cart is empty. Add items before checkout.');
+            return;
+        }
+
+        const formData = new FormData(form);
+        const address = {
+            fullName: formData.get('fullName')?.trim() || '',
+            email: formData.get('email')?.trim() || '',
+            phone: formData.get('phone')?.trim() || '',
+            address1: formData.get('address1')?.trim() || '',
+            address2: formData.get('address2')?.trim() || '',
+            city: formData.get('city')?.trim() || '',
+            state: formData.get('state')?.trim() || '',
+            postalCode: formData.get('postalCode')?.trim() || '',
+            country: formData.get('country')?.trim() || '',
+        };
+
+        const validationError = validateAddress(address);
+        if (validationError) {
+            alert(validationError);
+            return;
+        }
+
+        localStorage.setItem('checkoutAddress', JSON.stringify(address));
+        renderAddressPreview(address);
+        window.location.href = 'checkout.html';
+    });
+}
+
+function hydrateAddressForm(form) {
+    try {
+        const saved = localStorage.getItem('checkoutAddress');
+        if (!saved) return;
+        const address = JSON.parse(saved);
+        ['fullName', 'email', 'phone', 'address1', 'address2', 'city', 'state', 'postalCode', 'country'].forEach((key) => {
+            if (address[key] && form.elements.namedItem(key)) {
+                form.elements.namedItem(key).value = address[key];
+            }
+        });
+    } catch (e) {
+        console.warn('Could not load saved address', e);
+    }
+}
+
+function loadSavedAddress() {
+    try {
+        const saved = localStorage.getItem('checkoutAddress');
+        return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+        console.warn('Failed to parse saved address', e);
+        return null;
+    }
+}
+
+function renderAddressPreview(address) {
+    const preview = document.getElementById('addressPreview');
+    if (!preview) return;
+
+    if (!address) {
+        preview.innerHTML = '<p class="muted">No address saved yet.</p>';
+        return;
+    }
+
+    const lines = [
+        `${address.fullName}${address.phone ? ' · ' + address.phone : ''}`,
+        address.email,
+        address.address1,
+        address.address2,
+        `${address.city}, ${address.state} ${address.postalCode}`.trim(),
+        address.country
+    ].filter(Boolean);
+
+    preview.innerHTML = `
+        <strong>Shipping to</strong>
+        <div>${lines.join('<br>')}</div>
+    `;
+}
+
+function validateAddress(address) {
+    if (!address.fullName) return 'Full name is required';
+    if (!address.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address.email)) return 'Enter a valid email';
+
+    const digits = address.phone.replace(/\D/g, '');
+    if (digits.length !== 10) return 'Enter a 10-digit phone number';
+
+    if (!address.address1) return 'Address line 1 is required';
+    if (!address.city) return 'City is required';
+    if (!address.state) return 'State is required';
+
+    const pin = address.postalCode.replace(/\D/g, '');
+    if (pin.length !== 6) return 'Enter a 6-digit postal code';
+
+    if (!address.country) return 'Country is required';
+
+    return '';
 }
 
 // Optional: sync cart to backend if endpoint exists
