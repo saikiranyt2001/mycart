@@ -19,6 +19,11 @@ app.use('/api/cart', auth, require('./routes/cart'));
 app.use('/api/orders', auth, require('./routes/orders'));
 app.use('/api/users', auth, require('./routes/users'));
 
+// Root info
+app.get('/', (req, res) => {
+  res.json({ message: 'MyCart API is running', health: '/api/health' });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
