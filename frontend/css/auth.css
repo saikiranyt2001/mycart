@@ -46,6 +46,10 @@ body {
     color: var(--secondary-color);
 }
 
+.auth-box form {
+    text-align: center;
+}
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -58,6 +62,8 @@ body {
     overflow: hidden;
     background: #fff;
     position: relative;
+    width: 100%;
+    max-width: 320px;
 }
 
 .password-input-wrapper input {
@@ -65,6 +71,15 @@ body {
     min-width: 0;
     border: 0;
     padding: 0.6rem 2.1rem 0.6rem 0.8rem;
+    background: #fff;
+}
+
+.password-input-wrapper input:-webkit-autofill,
+.password-input-wrapper input:-webkit-autofill:hover,
+.password-input-wrapper input:-webkit-autofill:focus {
+    box-shadow: 0 0 0 1000px #fff inset;
+    -webkit-text-fill-color: var(--dark-text);
+    caret-color: var(--dark-text);
 }
 
 .password-input-wrapper input:focus {
@@ -87,12 +102,13 @@ body {
     cursor: pointer;
     color: #666;
     font-size: 0.9rem;
+    background: transparent;
     transition: background-color 0.2s, color 0.2s;
 }
 
 .toggle-password:hover {
-    background: #f5f5f5;
-    color: var(--primary-color);
+    background: transparent;
+    color: #333;
 }
 
 .toggle-password:focus {
@@ -142,8 +158,11 @@ body {
 }
 
 .auth-box button {
-    width: 100%;
-    padding: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    padding: 0.8rem 1.25rem;
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -156,6 +175,17 @@ body {
 
 .auth-box button:hover {
     background-color: #E85A2A;
+}
+
+.auth-box button.toggle-password {
+    background: transparent;
+    color: #666;
+    padding: 0;
+    width: 1rem;
+    min-width: 0;
+    height: 1rem;
+    border: none;
+    box-shadow: none;
 }
 
 .auth-link {

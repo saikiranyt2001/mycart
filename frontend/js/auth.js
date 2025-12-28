@@ -63,7 +63,8 @@ if (loginForm) {
                 body: JSON.stringify(formData)
             });
 
-            const data = await response.json();
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson ? await response.json() : { message: await response.text() };
 
             if (response.ok) {
                 localStorage.setItem('token', data.token);

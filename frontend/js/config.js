@@ -24,23 +24,19 @@
     const candidates = [];
     const isLocalHost = (typeof window !== 'undefined') && ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
-    // On localhost/127 force local backend without probing to avoid hitting remote
-    if (isLocalHost) {
-      console.info('[api] forcing local base', DEFAULT_LOCAL);
-      return DEFAULT_LOCAL;
-    }
-
     if (stored && stored.trim()) {
       candidates.push(stored.trim());
     }
 
-    candidates.push(DEFAULT_LOCAL);
-
-    if (typeof window !== 'undefined' && window.location && /^https?:/.test(window.location.origin)) {
-      candidates.push(`${window.location.origin}/api`);
+    if (isLocalHost) {
+      candidates.push(DEFAULT_LOCAL, DEFAULT_REMOTE);
+    } else {
+      candidates.push(DEFAULT_LOCAL);
+      if (typeof window !== 'undefined' && window.location && /^https?:/.test(window.location.origin)) {
+        candidates.push(`${window.location.origin}/api`);
+      }
+      candidates.push(DEFAULT_REMOTE);
     }
-
-    candidates.push(DEFAULT_REMOTE);
 
     for (const c of candidates) {
       if (await probe(c)) {
@@ -48,8 +44,11 @@
         return c;
       }
     }
-    console.warn('[api] falling back to', candidates[0]);
-    return candidates[0] || DEFAULT_LOCAL;
+
+    // If nothing responded, prefer remote when running on localhost to avoid stale ports
+    const fallback = isLocalHost ? DEFAULT_REMOTE : (candidates[0] || DEFAULT_REMOTE);
+    console.warn('[api] falling back to', fallback);
+    return fallback;
   }
 
   const ready = (async () => {
