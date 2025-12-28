@@ -8,11 +8,16 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 const auth = require('./middleware/auth');
 
 const app = express();
+const FRONTEND_DIR = path.join(__dirname, '..', 'frontend');
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve static frontend (supports /login.html and /frontend/login.html)
+app.use(express.static(FRONTEND_DIR));
+app.use('/frontend', express.static(FRONTEND_DIR));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
