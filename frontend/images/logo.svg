@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+  <title>MyCart logo</title>
+  <desc>Shopping cart icon with orange shelves and blue frame</desc>
+  <path d="M42 48h34l12 84h70" fill="none" stroke="#004E89" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="78" y="64" width="96" height="72" rx="10" fill="#FCE9E3" stroke="#004E89" stroke-width="10"/>
+  <rect x="90" y="76" width="72" height="10" rx="5" fill="#FF6B35" opacity="0.9"/>
+  <rect x="90" y="96" width="72" height="10" rx="5" fill="#FF6B35" opacity="0.8"/>
+  <rect x="90" y="116" width="72" height="10" rx="5" fill="#FF6B35" opacity="0.7"/>
+  <circle cx="92" cy="152" r="12" fill="#FF3B30" stroke="#004E89" stroke-width="6"/>
+  <circle cx="156" cy="152" r="12" fill="#FF3B30" stroke="#004E89" stroke-width="6"/>
+</svg>

@@ -47,15 +47,17 @@
     font-size: 14px;
 }
 
+
 .checkout-form input:focus {
     outline: none;
-    border-color: #6c63ff;
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(220, 0, 0, 0.15);
 }
+
 
 .checkout-form button {
     padding: 12px;
-    background: #6c63ff;
+    background: var(--primary-color);
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -219,8 +221,10 @@
 }
 
 :root {
-    --primary-color: #FF6B35;
-    --secondary-color: #004E89;
+    --primary-color: #DC0000;
+    --secondary-color: #050E3C;
+    --accent-color: #FF3838;
+    --secondary-accent: #002455;
     --success-color: #1BBC9B;
     --light-bg: #F7F9FB;
     --dark-text: #2C3E50;
@@ -273,6 +277,16 @@ body.seller-page {
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
+}
+
+.logo-img {
+    height: 64px;
+    width: auto;
+    display: block;
+    background: transparent;
+    padding: 0 8px;
+    border-radius: 0;
+    filter: drop-shadow(0 0 6px #002455) drop-shadow(0 0 2px #fff);
 }
 
 .logo h1 {
